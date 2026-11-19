@@ -462,20 +462,10 @@ index bba45c0..dc79c0c 100644
  
  #include <Runtime/platform.h>
  
-@@ -60,6 +63,78 @@ static u32 lbl_803D5630[] = {
+@@ -60,6 +63,68 @@ static u32 lbl_803D5630[] = {
  };
  
  /* 46B6A0 */ static VsSceneController controller;
-+#ifdef __SWITCH__
-+/* Slippi online, FN_END_GAME: end the match the way an L+R+A+Start by `pauser` would, with a
-+ * shorter GAME! screen. Used on disconnect and on desync. */
-+void melee_nx_gmvs_request_online_end(int pauser)
-+{
-+    controller.state.pauser = (s8) pauser;
-+    controller.state.match_result = 7;
-+    controller.start.xD = 90;
-+}
-+#endif
 +#ifdef __SWITCH__
 +/* Slippi online, FN_END_GAME: end the match the way an L+R+A+Start by `pauser` would, with a
 + * shorter GAME! screen. Used on disconnect and on desync. */
