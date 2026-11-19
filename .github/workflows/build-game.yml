@@ -1,0 +1,55 @@
+# Builds melee.nro on GitHub's servers. Run it from the Actions tab ("Build game" -> Run workflow).
+# Any *.patch file in .github/local-patches/ is applied before building.
+name: Build game
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Free disk space (the build needs about 40 GB)
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/local/.ghcup \
+                      /opt/hostedtoolcache/CodeQL /usr/local/share/boost /usr/share/swift \
+                      /usr/local/share/powershell /usr/local/lib/node_modules
+          sudo docker image prune --all --force
+          df -h /
+
+      - uses: actions/checkout@v4
+
+      - name: Apply local patches
+        run: |
+          shopt -s nullglob
+          for p in .github/local-patches/*.patch; do
+            echo "Applying $p"
+            git apply --whitespace=nowarn "$p"
+          done
+
+      - name: Fetch dependencies
+        run: bash builder/fetch-deps.sh
+
+      - name: Build toolchain image
+        run: bash builder/docker.sh image
+
+      - name: Build graphics (Dawn, SDL)
+        env:
+          MELEE_BUILD_JOBS: 4
+        run: bash builder/docker.sh graphics all
+
+      - name: Build game
+        env:
+          MELEE_BUILD_JOBS: 4
+        run: bash builder/docker.sh melee all
+
+      - name: Disk left
+        if: always()
+        run: df -h /
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: melee-nro
+          path: build/switch-deko/melee.nro
+          if-no-files-found: error
