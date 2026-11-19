@@ -47,8 +47,10 @@ fetch_dawn() {
   git -C ref/dawn remote add origin "$DAWN_URL"
   git -C ref/dawn fetch --depth 1 origin "$DAWN_REV"
   git -C ref/dawn checkout --detach FETCH_HEAD
-  # Only abseil is needed; the full submodule set is enormous and unused here.
-  git -C ref/dawn submodule update --init --recursive third_party/abseil-cpp
+  # Only these are needed (abseil; jinja2 and markupsafe for the code generators; SPIR-V headers,
+  # which Dawn's CMake always adds); the full submodule set is enormous and unused here.
+  git -C ref/dawn submodule update --init --recursive --depth 1 \
+    third_party/abseil-cpp third_party/jinja2 third_party/markupsafe third_party/spirv-headers/src
 }
 
 fetch_sdl_legacy() {
