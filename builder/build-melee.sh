@@ -84,4 +84,4 @@ case "$stage" in
   build)     do_build ;;
   all)       do_patch; do_configure; do_build ;;
 esac
-echo "build-melee.sh [$stage] done (graphics: $gfx, SDL variant: $sdl_variant, build dir: ${build_dir#"$repo"/})."
+echo "build-melee.sh [$stage] done (graphics: deko3d, SDL variant: $sdl_variant, build dir: ${build_dir#"$repo"/})."
