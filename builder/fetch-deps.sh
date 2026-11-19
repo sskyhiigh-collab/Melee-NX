@@ -41,8 +41,12 @@ fetch_melee_pc() {
 fetch_dawn() {
   skip_if_present ref/dawn && return 0
   echo "==> ref/dawn ($DAWN_REV)"
-  git clone "$DAWN_URL" ref/dawn
-  git -C ref/dawn checkout --detach "$DAWN_REV"
+  # The pinned commit is no longer on any branch of the fork, so a plain clone does not contain it;
+  # fetch it by id instead (GitHub serves any commit it still has), which is also far smaller.
+  git init -q ref/dawn
+  git -C ref/dawn remote add origin "$DAWN_URL"
+  git -C ref/dawn fetch --depth 1 origin "$DAWN_REV"
+  git -C ref/dawn checkout --detach FETCH_HEAD
   # Only abseil is needed; the full submodule set is enormous and unused here.
   git -C ref/dawn submodule update --init --recursive third_party/abseil-cpp
 }
