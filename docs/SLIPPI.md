@@ -182,8 +182,10 @@ A disconnect or a checksum mismatch ends the match the way L+R+A+Start does and 
 
 ### Slippi's gameplay codes
 
-Slippi Dolphin always plays with these, so an online match here does too. Each is a hunk in the
-patched sources, ported from the donor's `melee-native.patch`.
+Slippi Dolphin always plays with these, so an online match here does too. Offline matches use
+them as well, like a tournament setup, unless `perf.cfg` sets `slippi_codes 0`; the port's own
+frozen Pokemon Stadium option still applies offline. Each is a hunk in the patched sources, ported
+from the donor's `melee-native.patch`.
 
 | Code | Site |
 |---|---|

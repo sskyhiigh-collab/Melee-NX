@@ -9,7 +9,7 @@ startup. Without the file every key has its default.
   `opt_safe 1` turns every opt off except those the file sets explicitly.
 - **setting**: a plain value.
 
-16 keys.
+17 keys.
 
 | Key | Kind | Default | Values | Read in |
 |---|---|---|---|---|
@@ -25,6 +25,7 @@ startup. Without the file every key has its default.
 | `prof_start` | setting | `60` | seconds after launch before recording starts (sampling profiler) | `switch/src/prof_switch.cpp:196` |
 | `rollback_selftest` | setting | `0` | frames between rollback determinism self-tests; 0 off (docs/SLIPPI.md) | `switch/src/rollback_switch.cpp:331` |
 | `rollback_selftest_depth` | setting | `7` | frames each rollback self-test re-simulates, 1-30 (docs/SLIPPI.md) | `switch/src/rollback_switch.cpp:332` |
+| `slippi_codes` | setting | `1` | 1 plays offline with Slippi's gameplay codes (UCF 0.84, neutral spawns, fixes); 0 vanilla offline | `switch/slippi/game/slippi_online.c:189` |
 | `slippi_delay` | setting | `2` | online input delay in frames, 1-9 (docs/SLIPPI.md) | `switch/slippi/slippi_host.cpp:240` |
 | `texture_cmpr_bc1` | setting | `0` | 1 keeps CMPR textures compressed as BC1, an eighth of the RGBA8 bytes (deko3d renderer) | `builder/integrate-deko.py:343` |
 | `uber` | setting | `0` | 0 off, 1 hybrid, 2 always; measured too slow on the GPU (NVK renderer) | `switch/src/perf_switch.cpp` |

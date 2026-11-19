@@ -2,7 +2,8 @@
 /* Slippi's gameplay codes that need code of their own: UCF 0.84, neutral spawns, offscreen damage,
  * and the match's game info block. The one-line codes sit at their sites in the patched sources.
  * Ported from Melee Unlocked (sourceport/game/shim/mu_gecko.c, mu_replay.c and its gmvs.c patch,
- * GPL-2.0-or-later). All of it runs only while melee_nx_online_codes() is nonzero.
+ * GPL-2.0-or-later). All of it runs only while melee_nx_online_codes() is nonzero: online, and
+ * offline unless perf.cfg sets `slippi_codes 0`.
  *
  * This file is game state: it is built into melee_game, so the UCF pad ring is inside rollback
  * snapshots like the fighters it describes. */

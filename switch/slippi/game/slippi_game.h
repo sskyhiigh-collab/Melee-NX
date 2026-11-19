@@ -19,8 +19,10 @@
 int melee_nx_online_active(void); /* an online match is running */
 int melee_nx_online_resim(void);  /* re-simulating after a rollback load */
 /* Slippi Dolphin always plays with its gameplay codes (UCF 0.84, neutral spawns, the determinism
- * fixes); nonzero while an online match is pending or running, so this game does too. */
+ * fixes); nonzero while an online match is pending or running, so this game does too. Offline,
+ * perf.cfg `slippi_codes` (default 1) turns them on as well. */
 int melee_nx_online_codes(void);
+int melee_nx_online_match(void); /* an online match is pending or running */
 int melee_nx_online_mode(void);       /* Slippi's mode id (1 Unranked, 2 Direct), -1 offline */
 int melee_nx_online_local_port(void); /* the local player's in-game port, -1 offline */
 int melee_nx_online_frozen_stadium(void); /* the match's frozen Pokemon Stadium choice */
@@ -28,7 +30,7 @@ int melee_nx_online_frozen_stadium(void); /* the match's frozen Pokemon Stadium 
 int melee_nx_online_take_finished(void);
 int melee_nx_online_boot_mode(int mode); /* the game mode the boot scene hands over to */
 /* The port's own frozen Stadium option never applies to an online match. */
-#define melee_nx_pc_frozen_stadium() (pc_is_frozen_stadium_enabled() && !melee_nx_online_codes())
+#define melee_nx_pc_frozen_stadium() (pc_is_frozen_stadium_enabled() && !melee_nx_online_match())
 
 /* VS mode, leaving the stage select: find the opponent and agree on the match (blocks, with the
  * status on screen). 1: `vs` now holds the negotiated match (or play is offline and nothing

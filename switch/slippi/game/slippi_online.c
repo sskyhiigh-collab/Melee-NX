@@ -173,9 +173,22 @@ int melee_nx_online_resim(void)
 {
     return online.resim;
 }
-int melee_nx_online_codes(void)
+int melee_nx_online_match(void)
 {
     return online.active || online.pending;
+}
+/* perf.cfg `slippi_codes` (default 1): play offline with Slippi's gameplay codes too, like a
+ * tournament setup on Slippi Dolphin. Read once; online matches always use them. */
+static int offline_codes = -1;
+int melee_nx_online_codes(void)
+{
+    if (online.active || online.pending) {
+        return 1;
+    }
+    if (offline_codes < 0) {
+        offline_codes = melee_nx_perf_int("slippi_codes", 1) != 0;
+    }
+    return offline_codes;
 }
 int melee_nx_online_mode(void)
 {

@@ -38,6 +38,7 @@ DESCRIPTIONS = {
     'prof_start': 'seconds after launch before recording starts (sampling profiler)',
     'rollback_selftest': 'frames between rollback determinism self-tests; 0 off (docs/SLIPPI.md)',
     'rollback_selftest_depth': 'frames each rollback self-test re-simulates, 1-30 (docs/SLIPPI.md)',
+    'slippi_codes': '1 plays offline with Slippi\'s gameplay codes (UCF 0.84, neutral spawns, fixes); 0 vanilla offline',
     'slippi_delay': 'online input delay in frames, 1-9 (docs/SLIPPI.md)',
     'texture_cmpr_bc1': '1 keeps CMPR textures compressed as BC1, an eighth of the RGBA8 bytes (deko3d renderer)',
 }
